@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 4 - Corregido</title>
+</head>
+<body>
+    <input type="text" id="tareaInput" placeholder="Nombre de la tarea">
+    <input type="text" id="asignadoAInput" placeholder="Asignado a">
+    <button id="agregarTareaBtn">Agregar tarea</button>
+    <ul id="listaDeTareas"></ul>
+
+    <script>
+        class AdministradorDeTareas {
+            constructor() {
+                this.tareas = [];
+            }
+
+            agregarTarea(tarea, asignadoA) {
+                const tareaId = `tarea-${this.tareas.length + 1}`;
+                const tareaItem = document.createElement('li');
+                tareaItem.id = tareaId;
+
+                const tareaTexto = document.createElement('span');
+                tareaTexto.innerText = `${tarea} - Asignado a: ${asignadoA} `;
+                tareaTexto.id = `texto-${tareaId}`;
+                
+                const editarBtn = document.createElement('button');
+                editarBtn.innerText = 'Editar';
+                editarBtn.onclick = () => this.editarTarea(tareaId);
+
+                const eliminarBtn = document.createElement('button');
+                eliminarBtn.innerText = 'Eliminar';
+                eliminarBtn.onclick = () => this.eliminarTarea(tareaId);
+
+                tareaItem.appendChild(tareaTexto);
+                tareaItem.appendChild(editarBtn);
+                tareaItem.appendChild(eliminarBtn);
+
+                document.getElementById('listaDeTareas').appendChild(tareaItem);
+                this.tareas.push({ tarea, asignadoA });
+            }
+
+            eliminarTarea(id) {
+                const tareaItem = document.getElementById(id);
+                tareaItem.remove();
+            }
+
+            editarTarea(id) {
+                const tareaTexto = document.getElementById(`texto-${id}`);
+                const nuevaTarea = prompt('Editar tarea:', tareaTexto.innerText.split(' - ')[0]);
+                const nuevoAsignadoA = prompt('Asignado a:', tareaTexto.innerText.split('Asignado a: ')[1]);
+
+                if (nuevaTarea && nuevoAsignadoA) {
+                    tareaTexto.innerText = `${nuevaTarea} - Asignado a: ${nuevoAsignadoA} `;
+                }
+            }
+        }
+
+        const adminTareas = new AdministradorDeTareas();
+
+        document.getElementById('agregarTareaBtn').addEventListener('click', () => {
+            const tarea = document.getElementById('tareaInput').value;
+            const asignadoA = document.getElementById('asignadoAInput').value;
+            adminTareas.agregarTarea(tarea, asignadoA);
+            document.getElementById('tareaInput').value = '';
+            document.getElementById('asignadoAInput').value = '';
+        });
+    </script>
+</body>
+</html>
+

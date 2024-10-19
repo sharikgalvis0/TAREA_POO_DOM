@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2</title>
+</head>
+<body>
+    <input type="text" id="tareaInput" placeholder="Nueva tarea">
+    <button id="agregarBtn">Agregar tarea</button>
+    <ul id="listaTareas"></ul>
+
+    <script>
+        class ListaTareas {
+            constructor() {
+                this.contador = 0;
+            }
+
+            agregarTarea(tarea) {
+                this.contador++;
+                const nuevaTarea = document.createElement('li');
+                nuevaTarea.innerText = tarea;
+                nuevaTarea.id = `tarea-${this.contador}`;
+                document.getElementById('listaTareas').appendChild(nuevaTarea);
+            }
+        }
+
+        const listaTareas = new ListaTareas();
+        document.getElementById('agregarBtn').addEventListener('click', () => {
+            const tarea = document.getElementById('tareaInput').value;
+            listaTareas.agregarTarea(tarea);
+            document.getElementById('tareaInput').value = '';
+        });
+    </script>
+</body>
+</html>

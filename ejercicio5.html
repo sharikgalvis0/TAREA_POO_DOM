@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 5 - Imágenes con nombres editables</title>
+    <style>
+        .galeria img {
+            width: 180px;
+            height: 180px;
+            margin: 25px;
+            transition: transform 0.2s;
+            margin-left: 100px;
+            margin-top: 80px;
+        }
+        .galeria img:hover {
+            transform: scale(1.5);
+        }
+        .imagen-container {
+            display: inline-block;
+            text-align: center;
+        }
+
+        button {
+            margin-top: 0px;
+            margin-left: 80px;
+        }
+
+        #cambiarTemaBtn{
+            margin-top: 50px;
+            margin-left: 30px;
+        }
+
+        #nombre-1{
+            margin-left: 80px;
+        }
+
+        #nombre-2{
+            margin-left: 80px;
+        }
+
+        #nombre-3{
+            margin-left: 80px;
+        }
+    </style>
+</head>
+<body>
+    <div class="galeria">
+        <div class="imagen-container">
+            <img src="Imagenes/Debor.jpg" alt="Imagen 1">
+            <p id="nombre-1">Nombre 1</p>
+            <button onclick="editarNombre('nombre-1')">Editar nombre</button>
+        </div>
+        <div class="imagen-container">
+            <img src="Imagenes/Debora.jpg" alt="Imagen 2">
+            <p id="nombre-2">Nombre 2</p>
+            <button onclick="editarNombre('nombre-2')">Editar nombre</button>
+        </div>
+        <div class="imagen-container">
+            <img src="Imagenes/Debora1.jpg" alt="Imagen 3">
+            <p id="nombre-3">Nombre 3</p>
+            <button onclick="editarNombre('nombre-3')">Editar nombre</button>
+        </div>
+    </div>
+    <button id="cambiarTemaBtn">Cambiar Tema</button>
+
+    <script>
+        class Galeria {
+            cambiarTema(color) {
+                document.body.style.backgroundColor = color;
+            }
+        }
+
+        class BotonTema extends Galeria {
+            constructor(botonId, color) {
+                super();
+                this.boton = document.getElementById(botonId);
+                this.boton.addEventListener('click', () => this.cambiarTema(color));
+            }
+        }
+
+        new BotonTema('cambiarTemaBtn', 'purple');
+    
+        
+        function editarNombre(id) {
+            const nombreParrafo = document.getElementById(id);
+            const nuevoNombre = prompt('Introduce un nuevo nombre:', nombreParrafo.innerText);
+            if (nuevoNombre) {
+                nombreParrafo.innerText = nuevoNombre;
+            }
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3</title>
+</head>
+<body>
+    <p id="parrafo">Mi nombre es Sharik Galvis, tengo 19 años, estoy en quinto semestre de la tecnología en Desarrollo de Software. Amo estudiar y aprender programación, es muy entretenido.</p>
+    <button id="cambiarColorBtn">Cambiar color</button>
+
+    <script>
+        class Elemento {
+            cambiarColor(elemento, color) {
+                elemento.style.backgroundColor = color;
+            }
+        }
+
+        class Boton extends Elemento {
+            constructor(botonId, parrafoId, color) {
+                super();
+                this.boton = document.getElementById(botonId);
+                this.parrafo = document.getElementById(parrafoId);
+                this.color = color;
+                this.boton.addEventListener('click', () => this.cambiarColor(this.parrafo, this.color));
+            }
+        }
+
+        new Boton('cambiarColorBtn', 'parrafo', 'pink');
+    </script>
+</body>
+</html>

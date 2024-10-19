@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1</title>
+</head>
+<body>
+    <button id="adminBtn">Mostrar Administrador</button>
+    <button id="comercialBtn">Mostrar Comercial</button>
+    <p id="mensaje"></p>
+
+    <script>
+        class Usuario {
+            constructor(nombre, edad) {
+                this.nombre = nombre;
+                this.edad = edad;
+            }
+        }
+
+        class Administrador extends Usuario {
+            mostrarMensaje() {
+                document.getElementById('mensaje').innerText = 
+                    `Soy ${this.nombre}, tengo ${this.edad} años y mi rol es Administrador.`;
+            }
+        }
+
+        class Comercial extends Usuario {
+            mostrarMensaje() {
+                document.getElementById('mensaje').innerText = 
+                    `Soy ${this.nombre}, tengo ${this.edad} años y mi rol es Comercial.`;
+            }
+        }
+
+        const admin = new Administrador('Julia', 25);
+        const comercial = new Comercial('Ana Sofía', 24);
+
+        document.getElementById('adminBtn').addEventListener('click', () => admin.mostrarMensaje());
+        document.getElementById('comercialBtn').addEventListener('click', () => comercial.mostrarMensaje());
+    </script>
+</body>
+</html>
